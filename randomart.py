@@ -84,7 +84,7 @@ class Minus():
 def buildExpr(prob = 0.99):
    if random.random() < prob:
        # Randomly choose equation!
-      return random.choice([SinPi, CosPi, Minus, Plus, Times])(prob)
+      return random.choice([CosPi, Minus, Plus, Times])(prob)
    else:
       return random.choice([X, Y])()
 
