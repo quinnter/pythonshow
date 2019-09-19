@@ -113,7 +113,7 @@ def plotColor(redExp, greenExp, blueExp, pixelsPerUnit = 150):
     #Merge three colour planes into one image (Still not coloured yet!!)
     return Image.merge("RGB", (redPlane, greenPlane, bluePlane))
 
-def makeImage(numPics = 5):
+def makeImage(numPics = 6):
    with open("eqns.txt", 'w') as eqnsFile:
       for i in range(numPics):
           # Create the expressions that will determine the RBG colours
@@ -130,4 +130,4 @@ def makeImage(numPics = 5):
          image = plotColor(redExp, greenExp, blueExp)
          image.save("img" + str(i) + ".png", "PNG")
 
-makeImage(5)
+makeImage(6)
