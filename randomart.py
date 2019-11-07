@@ -84,16 +84,17 @@ class Minus():
 def buildExpr(prob = 0.99):
    if random.random() < prob:
        # Randomly choose equation!
-      return random.choice([CosPi, Minus, Plus, Times])(prob)
+      return random.choice([CosPi, SinPi, Times, Minus, Plus])(prob)
    else:
       return random.choice([X, Y])()
 
-def plotIntensity(exp, pixelsPerUnit = 150):
+def plotIntensity(exp, pixelsPerUnit = 270):
     #Create the new image canvas, define the size
-    canvasWidth = 2 * pixelsPerUnit + 1
-    canvas = Image.new("L", (canvasWidth, canvasWidth))
+    canvasWidth = 4 * pixelsPerUnit
+    canvasHeight = 5 * pixelsPerUnit
+    canvas = Image.new("L", (canvasWidth, canvasHeight))
 
-    for py in range(canvasWidth):
+    for py in range(canvasHeight):
         for px in range(canvasWidth):
             # Convert pixel location to [-1,1] coordinates
             x = float(px - pixelsPerUnit) / pixelsPerUnit 
@@ -106,14 +107,14 @@ def plotIntensity(exp, pixelsPerUnit = 150):
 
     return canvas
 
-def plotColor(redExp, greenExp, blueExp, pixelsPerUnit = 150):
+def plotColor(redExp, greenExp, blueExp, pixelsPerUnit = 270):
     redPlane   = plotIntensity(redExp, pixelsPerUnit)
     greenPlane = plotIntensity(greenExp, pixelsPerUnit)
     bluePlane  = plotIntensity(blueExp, pixelsPerUnit)
     #Merge three colour planes into one image (Still not coloured yet!!)
     return Image.merge("RGB", (redPlane, greenPlane, bluePlane))
 
-def makeImage(numPics = 6):
+def makeImage(numPics = 1):
    with open("eqns.txt", 'w') as eqnsFile:
       for i in range(numPics):
           # Create the expressions that will determine the RBG colours
@@ -130,4 +131,4 @@ def makeImage(numPics = 6):
          image = plotColor(redExp, greenExp, blueExp)
          image.save("img" + str(i) + ".png", "PNG")
 
-makeImage(6)
+makeImage(1)
